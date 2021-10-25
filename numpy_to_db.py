@@ -10,15 +10,18 @@ class NumpyArrayEncoder(JSONEncoder):
         return JSONEncoder.default(self, obj)
 
 
-def np_to_json(array, name):
+def np_to_bytes(array, name):
     np_data = {name: array}
     encoded_numpy_data = json.dumps(np_data, cls=NumpyArrayEncoder)  # use dump() to write
-    return encoded_numpy_data
+    bytes_numpy_data = bytes(encoded_numpy_data, encoding='utf8')
+    return bytes_numpy_data
 
 
-def json_to_np(json_string, name):
+def bytes_to_np(json_bytes, name):
+    json_string = json_bytes.decode('utf8')
     decoded_array = json.loads(json_string)
-    return np.asarray(decoded_array[name])
+    np_array = np.asarray(decoded_array[name])
+    return np_array
 
 
 
