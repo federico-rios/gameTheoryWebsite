@@ -2,7 +2,7 @@ import unittest
 from db_model import db, Matrix, Round
 
 
-class MyTestCase(unittest.TestCase):
+class TestDb(unittest.TestCase):
 
     def test_matrix_model(self):
         """tests a simple query and addition of a Matrix row"""
